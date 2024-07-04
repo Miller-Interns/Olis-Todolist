@@ -10,5 +10,3 @@ import { RouterView } from 'vue-router'
     </nav>
   </header>
 </template>
-
-<style scoped></style>

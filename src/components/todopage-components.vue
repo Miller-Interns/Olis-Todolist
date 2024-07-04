@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { watch } from 'vue'
 import { RouterLink } from 'vue-router'
 import {
   boxes,
@@ -11,21 +10,10 @@ import {
   editTask,
   editTitle,
   saveTitle
-} from './composable/use-local-storage'
+} from '../composable/todo-functions'
+import { useLocalStorage } from '@/stores/use-local-storage'
 
-const categoryForm = window.localStorage.getItem('boxes')
-
-if (categoryForm) {
-  boxes.value = JSON.parse(categoryForm)
-}
-
-watch(
-  boxes,
-  (val) => {
-    window.localStorage.setItem('boxes', JSON.stringify(val))
-  },
-  { deep: true }
-)
+const useLocalStorage
 
 defineProps<{ pageHeader: string; toHome: string }>()
 </script>
