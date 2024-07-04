@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import type { TodoCategory } from '../interface/ITodoList'
+import type { TodoCategory } from '../types/todo-list'
 
 export const boxes = ref<TodoCategory[]>([])
 

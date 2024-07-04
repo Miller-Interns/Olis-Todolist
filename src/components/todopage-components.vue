@@ -12,51 +12,56 @@ import {
   saveTitle
 } from '../composable/todo-functions'
 import { useLocalStorage } from '@/stores/use-local-storage'
+import { onMounted } from 'vue'
 
-const useLocalStorage
+onMounted(() => {
+  useLocalStorage()
+})
 
-defineProps<{ pageHeader: string; toHome: string }>()
+const props = defineProps({
+  pageHeader: String,
+  toHome: String
+})
 </script>
 
 <template>
-  <div>
-    <h1 id="headerBox">{{ pageHeader }}</h1>
-    <RouterLink id="backButton" to="/">{{ toHome }}</RouterLink>
-    <button @click="addBox" id="addCategory">+</button>
-    <div id="boxContainer">
-      <div v-for="(box, index) in boxes" :key="box.id" class="box">
-        <div class="category-header">
-          <div v-if="box.isEditingTitle">
-            <input type="text" v-model="box.title" @blur="saveTitle(index)" />
-            <button id="saveButton" @click="saveTitle(index)">Save</button>
-          </div>
-          <div v-else>
-            <h3 id="catName">{{ box.title }}</h3>
-            <button @click="editTitle(index)" id="editButton">Edit</button>
-          </div>
-          <button @click="removeCategory(index)" id="delCatButton">X</button>
+  <h1 id="headerBox">{{ props.pageHeader }}</h1>
+  <RouterLink id="backButton" to="/">{{ props.toHome }}</RouterLink>
+  <button @click="addBox" id="addCategory">+</button>
+  <div id="boxContainer">
+    <div v-for="(box, index) in boxes" :key="box.id" class="box">
+      <div class="category-header">
+        <div v-if="box.isEditingTitle">
+          <input type="text" id="editTitle" v-model="box.title" @blur="saveTitle(index)" />
+          <button id="saveButton" @click="saveTitle(index)">📝</button>
         </div>
-        <div class="new-task">
-          <input id="inputTask" type="text" v-model="box.newTask" placeholder="Add to list" />
-          <button id="addButton" @click="addTask(index)">Add</button>
+        <div v-else>
+          <h3 id="catName">{{ box.title }}</h3>
+          <button @click="editTitle(index)" id="editButton">📝</button>
         </div>
-        <ul>
-          <li id="taskBox" v-for="task in box.tasks" :key="task.id" class="task">
-            <input
-              type="checkbox"
-              :checked="task.completed"
-              @change="toggleTaskCompletion(index, task.id)"
-            />
-            <input
-              type="text"
-              v-model="task.title"
-              @change="editTask(index, task.id, task.title)"
-              :class="{ completed: task.completed }"
-            />
-            <button @click="removeTask(index, task.id)" id="deleteButton">X</button>
-          </li>
-        </ul>
+        <button @click="removeCategory(index)" id="delCatButton">X</button>
       </div>
+      <div class="new-task">
+        <input id="inputTask" type="text" v-model="box.newTask" placeholder="Add to list" />
+        <button id="addButton" @click="addTask(index)">Add</button>
+      </div>
+      <ul>
+        <li id="taskBox" v-for="task in box.tasks" :key="task.id" class="task">
+          <input
+            type="checkbox"
+            :checked="task.completed"
+            @change="toggleTaskCompletion(index, task.id)"
+          />
+          <input
+            type="text"
+            id="editTaskName"
+            v-model="task.title"
+            @change="editTask(index, task.id, task.title)"
+            :class="{ completed: task.completed }"
+          />
+          <button @click="removeTask(index, task.id)" id="deleteButton">X</button>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -67,15 +72,15 @@ defineProps<{ pageHeader: string; toHome: string }>()
   color: white;
   display: inline-block;
   font-size: 40px;
+  font-weight: bold;
   top: 8%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 98%;
-  background: rgb(123, 118, 118);
+  background: #424549;
   padding: 10px;
   border-radius: 6px;
   text-align: center;
-  outline: 2px solid white;
   z-index: 10;
 }
 
@@ -85,14 +90,14 @@ defineProps<{ pageHeader: string; toHome: string }>()
   font-size: 40px;
   top: 2.9%;
   left: 2%;
-  color: black;
+  color: white;
   cursor: pointer;
   z-index: 10;
 }
 
 #backButton:hover {
-  color: white;
-  background: rgb(123, 118, 118);
+  color: black;
+  background: #424549;
 }
 
 #addCategory {
@@ -103,14 +108,14 @@ defineProps<{ pageHeader: string; toHome: string }>()
   font-size: 40px;
   top: 4.75%;
   right: 2.2%;
-  color: black;
+  color: white;
   z-index: 10;
 }
 
 #addCategory:hover {
-  color: white;
-  background: rgb(123, 118, 118);
+  background: transparent;
   cursor: pointer;
+  color: black;
 }
 
 #boxContainer {
@@ -122,7 +127,7 @@ defineProps<{ pageHeader: string; toHome: string }>()
 
 .box {
   width: 50vw;
-  background: rgb(123, 118, 118);
+  background: #424549;
   margin: 10px 0;
   margin-left: 30.05%;
   display: flex;
@@ -146,11 +151,17 @@ defineProps<{ pageHeader: string; toHome: string }>()
   width: 250px;
 }
 
+#editTitle,
+h3 {
+  font-size: 20px;
+}
+
 #editButton,
 #saveButton {
   margin: auto;
   display: inline;
   background: transparent;
+  color: white;
   border: none;
   border-radius: 6px;
 }
@@ -158,22 +169,21 @@ defineProps<{ pageHeader: string; toHome: string }>()
 #editButton:hover,
 #saveButton:hover {
   cursor: pointer;
-  text-decoration: underline;
-  color: white;
 }
 
 #delCatButton {
   color: white;
-  background: red;
   border: none;
   border-radius: 20px;
-  outline: 2px solid white;
+  background: transparent;
+  font-size: 17px;
+  font-weight: bold;
 }
 
 #delCatButton:hover {
   cursor: pointer;
-  background: white;
-  color: black;
+  background: transparent;
+  color: crimson;
 }
 
 #inputTask[type='text'] {
@@ -183,12 +193,16 @@ defineProps<{ pageHeader: string; toHome: string }>()
   color: black;
   background: transparent;
   padding: 10px;
-  font-weight: 14px;
+  font-size: 15px;
   border-radius: 6px;
 }
 
 #taskBox {
   display: flex;
+}
+
+#editTaskName {
+  font-size: 15px;
 }
 
 input[type='text'] {
@@ -242,8 +256,10 @@ input[type='checkbox'] {
 }
 
 #deleteButton {
+  font-size: 15px;
+  font-weight: bold;
   color: white;
-  background: rgb(123, 118, 118);
+  background: transparent;
   border: none;
   border-radius: 10px;
 }
@@ -251,7 +267,8 @@ input[type='checkbox'] {
 #deleteButton:hover {
   cursor: pointer;
   background: none;
-  color: red;
+  background: transparent;
+  color: crimson;
 }
 
 .completed {

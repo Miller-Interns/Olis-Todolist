@@ -38,7 +38,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-background: linear-gradient(135deg, #424549, #36393e, #282b30, #1e2124);
+    --color-background: #282b30;
     --color-background-soft: var(--vt-c-black-soft);
     --color-background-mute: var(--vt-c-black-mute);
 

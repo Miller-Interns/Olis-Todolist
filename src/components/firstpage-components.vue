@@ -1,16 +1,16 @@
 <script setup lang="ts">
-defineProps<{
-  fullName: string
-  dateCreated: string
-  button: string
-}>()
+const props = defineProps({
+  fullName: String,
+  dateCreated: String,
+  button: String
+})
 </script>
 
 <template>
   <div class="box">
-    <h2>{{ fullName }}</h2>
-    <h3>{{ dateCreated }}</h3>
-    <RouterLink class="button" to="/todopage">{{ button }}</RouterLink>
+    <h2>{{ props.fullName }}</h2>
+    <h3>{{ props.dateCreated }}</h3>
+    <RouterLink class="button" to="/todopage">{{ props.button }}</RouterLink>
   </div>
 </template>
 
@@ -29,7 +29,7 @@ defineProps<{
   left: 50%;
   transform: translate(-50%, -50%);
   width: 635px;
-  background: linear-gradient(135deg, #153677, #4e085f);
+  background: #424549;
   padding: 10px;
   border-radius: 6px;
   text-align: center;
@@ -37,14 +37,14 @@ defineProps<{
 }
 
 .box h2 {
-  color: #ffffff;
+  color: white;
   font-size: 50px;
   justify-content: center;
   align-items: center;
 }
 
 .box h3 {
-  color: #b75d5d;
+  color: white;
   margin-top: -10px;
   font-size: 35px;
   justify-content: center;
