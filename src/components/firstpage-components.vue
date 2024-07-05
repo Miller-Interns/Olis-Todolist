@@ -1,17 +1,20 @@
 <script setup lang="ts">
+import { sassify } from '@/composable/firstpage-functions'
+import sassifyButton from './sassify-button.vue'
 const props = defineProps({
   fullName: String,
   dateCreated: String,
-  button: String
+  routerButton: String
 })
 </script>
 
 <template>
-  <div class="box">
+  <div class="box" v-bind:style="sassify">
     <h2>{{ props.fullName }}</h2>
     <h3>{{ props.dateCreated }}</h3>
-    <RouterLink class="button" to="/todopage">{{ props.button }}</RouterLink>
+    <RouterLink class="button" to="/todopage">{{ props.routerButton }}</RouterLink>
   </div>
+  <sassifyButton />
 </template>
 
 <style scoped>
@@ -29,7 +32,6 @@ const props = defineProps({
   left: 50%;
   transform: translate(-50%, -50%);
   width: 635px;
-  background: #424549;
   padding: 10px;
   border-radius: 6px;
   text-align: center;
@@ -61,10 +63,5 @@ const props = defineProps({
   width: 230px;
   cursor: pointer;
   border-radius: 7px;
-}
-
-.button:hover {
-  color: white;
-  background: gray;
 }
 </style>

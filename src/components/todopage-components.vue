@@ -13,6 +13,8 @@ import {
 } from '../composable/todo-functions'
 import { useLocalStorage } from '@/stores/use-local-storage'
 import { onMounted } from 'vue'
+import { sassify } from '@/composable/firstpage-functions'
+import sassifyButton from './sassify-button.vue'
 
 onMounted(() => {
   useLocalStorage()
@@ -25,11 +27,11 @@ const props = defineProps({
 </script>
 
 <template>
-  <h1 id="headerBox">{{ props.pageHeader }}</h1>
+  <h1 id="headerBox" v-bind:style="sassify">{{ props.pageHeader }}</h1>
   <RouterLink id="backButton" to="/">{{ props.toHome }}</RouterLink>
   <button @click="addBox" id="addCategory">+</button>
   <div id="boxContainer">
-    <div v-for="(box, index) in boxes" :key="box.id" class="box">
+    <div v-for="(box, index) in boxes" :key="box.id" class="box" v-bind:style="sassify">
       <div class="category-header">
         <div v-if="box.isEditingTitle">
           <input type="text" id="editTitle" v-model="box.title" @blur="saveTitle(index)" />
@@ -64,6 +66,7 @@ const props = defineProps({
       </ul>
     </div>
   </div>
+  <sassifyButton />
 </template>
 
 <style scoped>
@@ -97,7 +100,7 @@ const props = defineProps({
 
 #backButton:hover {
   color: black;
-  background: #424549;
+  background: transparent;
 }
 
 #addCategory {
