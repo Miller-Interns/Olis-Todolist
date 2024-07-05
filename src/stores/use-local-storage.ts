@@ -1,5 +1,5 @@
 import { watch } from 'vue'
-import { boxes } from '@/composable/todo-functions'
+import { boxes } from '@/composables/todo-functions'
 
 export const useLocalStorage = () => {
   const useLocalStorage = window.localStorage.getItem('boxes')

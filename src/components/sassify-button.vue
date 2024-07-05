@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { sassify, toggleSlayColor } from '@/composable/firstpage-functions.ts'
+import { sassify, toggleSlayColor } from '@/composables/firstpage-functions'
 </script>
 
 <template>

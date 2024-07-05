@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { sassify } from '@/composable/firstpage-functions'
+import { sassify } from '@/composables/firstpage-functions'
 import sassifyButton from './sassify-button.vue'
 const props = defineProps({
   fullName: String,

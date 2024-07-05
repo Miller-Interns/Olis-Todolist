@@ -10,10 +10,10 @@ import {
   editTask,
   editTitle,
   saveTitle
-} from '../composable/todo-functions'
+} from '../composables/todo-functions'
 import { useLocalStorage } from '@/stores/use-local-storage'
 import { onMounted } from 'vue'
-import { sassify } from '@/composable/firstpage-functions'
+import { sassify } from '@/composables/firstpage-functions'
 import sassifyButton from './sassify-button.vue'
 
 onMounted(() => {
