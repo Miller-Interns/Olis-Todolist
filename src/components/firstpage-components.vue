@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { sassify } from '@/composables/firstpage-functions'
-import sassifyButton from './sassify-button.vue'
+import { changeColor } from '@/composables/firstpage-functions'
+import changeColorButton from './change-box-color.vue'
+import { RouterName } from '@/types/enum'
 const props = defineProps({
   fullName: String,
   dateCreated: String,
@@ -9,12 +10,12 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="box" v-bind:style="sassify">
+  <div class="box" v-bind:style="changeColor">
     <h2>{{ props.fullName }}</h2>
     <h3>{{ props.dateCreated }}</h3>
-    <RouterLink class="button" to="/todopage">{{ props.routerButton }}</RouterLink>
+    <RouterLink class="button" :to="RouterName.todoPage">{{ props.routerButton }}</RouterLink>
   </div>
-  <sassifyButton />
+  <changeColorButton />
 </template>
 
 <style scoped>

@@ -1,4 +1,4 @@
 export enum RouterName {
-  firstPage = 'home',
+  firstPage = '/',
   todoPage = 'todopage'
 }

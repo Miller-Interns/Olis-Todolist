@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { sassify, toggleSlayColor } from '@/composables/firstpage-functions'
+import { changeColor, toggleColor } from '@/composables/firstpage-functions'
 </script>
 
 <template>
-  <button @click="toggleSlayColor()" id="changeColorButton" v-bind:style="sassify">💅</button>
+  <button @click="toggleColor()" id="changeColorButton" v-bind:style="changeColor">💅</button>
 </template>
 
 <style>
