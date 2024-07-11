@@ -8,12 +8,12 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: RouterName.firstPage,
+      name: RouterName.FirstPage,
       component: HomeView
     },
     {
       path: '/todopage',
-      name: RouterName.todoPage,
+      name: RouterName.TodoPage,
       component: TodoPage
     }
   ]
