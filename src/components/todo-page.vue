@@ -20,7 +20,7 @@ const props = defineProps({
 
 <template>
   <h1 id="headerBox" v-bind:style="changeColor">{{ props.pageHeader }}</h1>
-  <RouterLink id="backButton" :to="RouterName.firstPage">⬅</RouterLink>
+  <RouterLink id="backButton" :to="RouterName.FirstPage">⬅</RouterLink>
   <button @click="addBox" id="addCategory">+</button>
   <div id="boxContainer">
     <div v-for="(box, index) in boxes" :key="box.id" class="box" v-bind:style="changeColor">

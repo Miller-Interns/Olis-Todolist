@@ -13,7 +13,7 @@ const props = defineProps({
   <div class="box" v-bind:style="changeColor">
     <h2>{{ props.fullName }}</h2>
     <h3>{{ props.dateCreated }}</h3>
-    <RouterLink class="button" :to="RouterName.todoPage">{{ props.routerButton }}</RouterLink>
+    <RouterLink class="button" :to="RouterName.TodoPage">{{ props.routerButton }}</RouterLink>
   </div>
   <changeColorButton />
 </template>
