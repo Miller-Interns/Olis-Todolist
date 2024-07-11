@@ -1,10 +1,10 @@
-export interface Task {
+export type Task = {
   id: number
   title: string
   completed: boolean
 }
 
-export interface TodoCategory {
+export type TodoCategory = {
   id: number
   newTask: string
   tasks: Task[]

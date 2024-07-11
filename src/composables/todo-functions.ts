@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import type { TodoCategory } from '../interface/ITodoList'
+import type { TodoCategory } from '../types/todo-list'
 
 export const boxes = ref<TodoCategory[]>([])
 
@@ -13,15 +13,14 @@ export function addBox() {
   })
 }
 
-export function addTask(boxIndex: number) {
-  const newTaskTitle = boxes.value[boxIndex].newTask.trim()
-  if (newTaskTitle) {
-    boxes.value[boxIndex].tasks.push({
+export function addTask(box: TodoCategory, newTask: string) {
+  if (newTask !== '') {
+    box.tasks.push({
       id: Date.now(),
-      title: newTaskTitle,
+      title: newTask,
       completed: false
     })
-    boxes.value[boxIndex].newTask = ''
+    box.newTask = ''
   }
 }
 
